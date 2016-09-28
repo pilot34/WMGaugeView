@@ -10,6 +10,12 @@
 /* Scale conversion macro from [0-1] range to view  real size range */
 #define FULL_SCALE(x,y)    (x)*self.bounds.size.width, (y)*self.bounds.size.height
 
+@interface WMGaugeView()<CAAnimationDelegate>
+
+@property (nonatomic) CGRect prevRect;
+
+@end
+
 @implementation WMGaugeView
 {
     /* Drawing rects */
@@ -53,7 +59,18 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     [self initialize];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    if (!CGRectEqualToRect(self.prevRect, self.bounds)) {
+        [self invalidateBackground];
+        [self invalidateNeedle];
+        self.prevRect = self.bounds;
+    }
 }
 
 /**
@@ -96,7 +113,9 @@
     _rangeColors = nil;
     _rangeLabels = nil;
     
-    _scaleDivisionColor = RGB(68, 84, 105);
+    _showRangeDivisions = NO;
+    
+    _scaleDivisionColor = nil;
     _scaleSubDivisionColor = RGB(217, 217, 217);
     
     _scaleFont = nil;
@@ -106,6 +125,7 @@
     _unitOfMeasurementFont = [UIFont fontWithName:@"Helvetica" size:0.04];
     _unitOfMeasurement = @"";
     _showUnitOfMeasurement = NO;
+    _spaceBetweenLabels = 0.01;
     
     animationCompletion = nil;
 
@@ -150,6 +170,12 @@
  */
 - (void)drawRect:(CGRect)rect
 {
+    if (rect.size.width > rect.size.height) {
+        rect = CGRectMake((rect.size.width - rect.size.height) / 2, 0, rect.size.height, rect.size.height);
+    } else if (rect.size.height > rect.size.width) {
+        rect = CGRectMake(0, (rect.size.height - rect.size.width) / 2, rect.size.width, rect.size.width);
+    }
+    
     if (background == nil)
     {
         // Create image context
@@ -176,15 +202,14 @@
         rootNeedleLayer = [CALayer new];
 
         // For performance puporse, the needle layer is not scaled to [0-1] range
-        rootNeedleLayer.frame = self.bounds;
+        rootNeedleLayer.frame = rect;
         [self.layer addSublayer:rootNeedleLayer];
         
         // Draw needle
-        [self drawNeedle];
+        [self drawNeedleInRect:CGRectMake(0, 0, rect.size.width, rect.size.height)];
         
-        // Set needle current value
         [self setValue:_value animated:NO];
-    }    
+    }
 }
 
 /**
@@ -202,6 +227,9 @@
 
     if (_showScale)
         [self drawScale:context];
+    
+    if (_showRangeDivisions)
+        [self drawRangeDivisions:context];
 
     if (_showRangeLabels)
         [self drawRangeLabels:context];
@@ -230,7 +258,6 @@
  */
 - (void)drawText:(CGContextRef)context
 {
-    CGContextSetShadow(context, CGSizeMake(0.05, 0.05), 2.0);
     UIFont* font = _unitOfMeasurementFont ? _unitOfMeasurementFont : [UIFont fontWithName:@"Helvetica" size:0.04];
     UIColor* color = _unitOfMeasurementColor ? _unitOfMeasurementColor : [UIColor whiteColor];
     NSDictionary* stringAttrs = @{ NSFontAttributeName : font, NSForegroundColorAttributeName : color };
@@ -268,7 +295,13 @@
         if ((fabsf(mod - 0) < 0.000001) || (fabsf(mod - div) < 0.000001))
         {
             // Initialize Core Graphics settings
-            UIColor *color = (_rangeValues && _rangeColors) ? [self rangeColorForValue:value] : _scaleDivisionColor;
+            // Initialize Core Graphics settings
+            UIColor *color = _scaleDivisionColor;
+            if (!color && _rangeValues && _rangeColors) {
+                color = [self rangeColorForValue:value];
+            } else if (!color) {
+                color = RGB(68, 84, 105);
+            }
             CGContextSetStrokeColorWithColor(context, color.CGColor);
             CGContextSetLineWidth(context, _scaleDivisionsWidth);
             CGContextSetShadow(context, CGSizeMake(0.05, 0.05), _showScaleShadow ? 2.0 : 0.0);
@@ -311,6 +344,73 @@
 }
 
 /**
+ * Scale drawing
+ */
+- (void)drawRangeDivisions:(CGContextRef)context
+{
+    NSMutableArray *values = self.rangeValues.mutableCopy;
+    if (![values containsObject:@(self.minValue)]) {
+        [values insertObject:@(self.minValue) atIndex:0];
+    }
+    
+    if (![values containsObject:@(self.maxValue)]) {
+        [values addObject:@(self.maxValue)];
+    }
+    
+    for (NSNumber *num in values) {
+        CGContextSaveGState(context);
+        
+        CGFloat valueAngle = (_scaleEndAngle - _scaleStartAngle) * num.doubleValue / self.maxValue;
+        
+        CGFloat resultAngle = DEGREES_TO_RADIANS(180 + _scaleStartAngle + valueAngle);
+        
+        if (num.doubleValue == self.minValue) {
+            resultAngle += _spaceBetweenLabels / 2;
+        } else if (num.doubleValue == self.maxValue) {
+            resultAngle -= _spaceBetweenLabels;
+        } else {
+            resultAngle -= _spaceBetweenLabels / 2;
+        }
+        
+        [self rotateContext:context fromCenter:center withAngle:resultAngle];
+        
+        
+        // Initialize Core Graphics settings
+        UIColor *color = _scaleDivisionColor;
+        if (!color && _rangeValues && _rangeColors) {
+            color = [self rangeColorForValue:num.doubleValue];
+        } else if (!color) {
+            color = RGB(68, 84, 105);
+        }
+        
+        CGContextSetStrokeColorWithColor(context, color.CGColor);
+        CGContextSetLineWidth(context, _scaleDivisionsWidth);
+        CGContextSetShadow(context, CGSizeMake(0.05, 0.05), _showScaleShadow ? 2.0 : 0.0);
+        
+        CGFloat y1 = scaleRect.origin.y;
+        CGFloat y3 = y1 + _scaleDivisionsLength;
+        
+        // Draw tick
+        CGContextMoveToPoint(context, 0.5, y1);
+        CGContextAddLineToPoint(context, 0.5, y3);
+        CGContextStrokePath(context);
+        
+        // Draw label
+        NSString *valueString = [NSString stringWithFormat:@"%0.0f", num.doubleValue];
+        UIFont* font = _scaleFont ? _scaleFont : [UIFont fontWithName:@"Helvetica-Bold" size:0.05];
+        NSDictionary* stringAttrs = @{ NSFontAttributeName : font, NSForegroundColorAttributeName : color };
+        NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:valueString attributes:stringAttrs];
+        CGSize fontWidth;
+        fontWidth = [valueString sizeWithAttributes:stringAttrs];
+        
+        [attrStr drawAtPoint:CGPointMake(0.5 - fontWidth.width / 2.0, y3 + 0.005)];
+        
+        
+        CGContextRestoreGState(context);
+    }
+}
+
+/**
  * scale range labels drawing 
  */
 - (void)drawRangeLabels:(CGContextRef)context
@@ -320,7 +420,7 @@
     CGContextSetShadow(context, CGSizeMake(0.0, 0.0), 0.0);
     
     CGFloat maxAngle = _scaleEndAngle - _scaleStartAngle;
-    CGFloat lastStartAngle = 0.0f;
+    CGFloat lastStartAngle = _spaceBetweenLabels;
 
     for (int i = 0; i < _rangeValues.count; i ++)
     {
@@ -330,7 +430,14 @@
         
         // Range curved shape
         UIBezierPath *path = [UIBezierPath bezierPath];
-        [path addArcWithCenter:center radius:rangeLabelsRect.size.width / 2.0 startAngle:DEGREES_TO_RADIANS(lastStartAngle) endAngle:DEGREES_TO_RADIANS(valueAngle) - 0.01 clockwise:YES];
+        
+        CGFloat endAngle = DEGREES_TO_RADIANS(valueAngle) - _spaceBetweenLabels;
+        
+        [path addArcWithCenter:center
+                        radius:rangeLabelsRect.size.width / 2.0
+                    startAngle:DEGREES_TO_RADIANS(lastStartAngle)
+                      endAngle:endAngle
+                     clockwise:YES];
         
         UIColor *color = _rangeColors[i];
         [color setStroke];
@@ -338,7 +445,12 @@
         [path stroke];
         
         // Range curved label
-        [self drawStringAtContext:context string:(NSString*)_rangeLabels[i] withCenter:center radius:rangeLabelsRect.size.width / 2.0 startAngle:DEGREES_TO_RADIANS(lastStartAngle) endAngle:DEGREES_TO_RADIANS(valueAngle)];
+        [self drawStringAtContext:context
+                           string:(NSString*)_rangeLabels[i]
+                       withCenter:center
+                           radius:rangeLabelsRect.size.width / 2.0
+                       startAngle:DEGREES_TO_RADIANS(lastStartAngle)
+                         endAngle:DEGREES_TO_RADIANS(valueAngle)];
         
         lastStartAngle = valueAngle;
     }
@@ -349,10 +461,10 @@
 /**
  * Needle drawing 
  */
-- (void)drawNeedle
+- (void)drawNeedleInRect:(CGRect)rect
 {
     if ([_style conformsToProtocol:@protocol(WMGaugeViewStyle)]) {
-        [_style drawNeedleOnLayer:rootNeedleLayer inRect:self.bounds];
+        [_style drawNeedleOnLayer:rootNeedleLayer inRect:rect];
     }
 }
 
@@ -742,6 +854,11 @@
     [self invalidateBackground];
 }
 
+- (void)setShowRangeDivisions:(bool)showRangeDivisions {
+    _showRangeDivisions = showRangeDivisions;
+    [self invalidateBackground];
+}
+
 - (void)setShowRangeLabels:(bool)showRangeLabels
 {
     _showRangeLabels = showRangeLabels;
@@ -769,6 +886,11 @@
 - (void)setUnitOfMeasurementVerticalOffset:(CGFloat)unitOfMeasurementVerticalOffset
 {
     _unitOfMeasurementVerticalOffset = unitOfMeasurementVerticalOffset;
+    [self invalidateBackground];
+}
+
+- (void)setSpaceBetweenLabels:(CGFloat)spaceBetweenLabels {
+    _spaceBetweenLabels = spaceBetweenLabels;
     [self invalidateBackground];
 }
 

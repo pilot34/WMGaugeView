@@ -59,12 +59,14 @@ WMGaugeViewSubdivisionsAlignment;
 @property (nonatomic, readwrite, strong) NSArray *rangeValues;
 @property (nonatomic, readwrite, strong) NSArray *rangeColors;
 @property (nonatomic, readwrite, strong) NSArray *rangeLabels;
+@property (nonatomic, readwrite, assign) bool showRangeDivisions;
 @property (nonatomic, readwrite, strong) UIColor *unitOfMeasurementColor;
 @property (nonatomic, readwrite, assign) CGFloat unitOfMeasurementVerticalOffset;
 @property (nonatomic, readwrite, strong) UIFont *unitOfMeasurementFont;
 @property (nonatomic, readwrite, strong) NSString *unitOfMeasurement;
 @property (nonatomic, readwrite, assign) bool showUnitOfMeasurement;
 @property (nonatomic, readwrite, strong) id<WMGaugeViewStyle> style;
+@property (nonatomic, readwrite, assign) CGFloat spaceBetweenLabels;
 
 /**
  * WMGaugeView public functions

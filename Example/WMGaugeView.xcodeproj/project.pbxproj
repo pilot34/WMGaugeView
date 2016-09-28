@@ -20,22 +20,7 @@
 		BEE44430189846A9002B489A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEE4442E189846A9002B489A /* Main.storyboard */; };
 		BEE44433189846A9002B489A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE44432189846A9002B489A /* ViewController.m */; };
 		BEE44435189846A9002B489A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEE44434189846A9002B489A /* Images.xcassets */; };
-		BEE4443C189846A9002B489A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4443B189846A9002B489A /* XCTest.framework */; };
-		BEE4443D189846A9002B489A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4441C189846A9002B489A /* Foundation.framework */; };
-		BEE4443E189846A9002B489A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE44420189846A9002B489A /* UIKit.framework */; };
-		BEE44446189846A9002B489A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEE44444189846A9002B489A /* InfoPlist.strings */; };
-		BEE44448189846A9002B489A /* WMGaugeViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE44447189846A9002B489A /* WMGaugeViewTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		BEE4443F189846A9002B489A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BEE44411189846A9002B489A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BEE44418189846A9002B489A;
-			remoteInfo = WMGaugeView;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3E788DD41BDCEAC500F78D6A /* WMGaugeViewStyleFlatThin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMGaugeViewStyleFlatThin.h; sourceTree = "<group>"; };
@@ -60,11 +45,7 @@
 		BEE44431189846A9002B489A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		BEE44432189846A9002B489A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		BEE44434189846A9002B489A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		BEE4443A189846A9002B489A /* WMGaugeViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WMGaugeViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE4443B189846A9002B489A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		BEE44443189846A9002B489A /* WMGaugeViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WMGaugeViewTests-Info.plist"; sourceTree = "<group>"; };
-		BEE44445189846A9002B489A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BEE44447189846A9002B489A /* WMGaugeViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMGaugeViewTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,16 +56,6 @@
 				BEE4441F189846A9002B489A /* CoreGraphics.framework in Frameworks */,
 				BEE44421189846A9002B489A /* UIKit.framework in Frameworks */,
 				BEE4441D189846A9002B489A /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BEE44437189846A9002B489A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BEE4443C189846A9002B489A /* XCTest.framework in Frameworks */,
-				BEE4443E189846A9002B489A /* UIKit.framework in Frameworks */,
-				BEE4443D189846A9002B489A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				BEE44422189846A9002B489A /* WMGaugeView */,
-				BEE44441189846A9002B489A /* WMGaugeViewTests */,
 				BEE4441B189846A9002B489A /* Frameworks */,
 				BEE4441A189846A9002B489A /* Products */,
 			);
@@ -120,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				BEE44419189846A9002B489A /* WMGaugeView.app */,
-				BEE4443A189846A9002B489A /* WMGaugeViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,24 +132,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BEE44441189846A9002B489A /* WMGaugeViewTests */ = {
-			isa = PBXGroup;
-			children = (
-				BEE44447189846A9002B489A /* WMGaugeViewTests.m */,
-				BEE44442189846A9002B489A /* Supporting Files */,
-			);
-			path = WMGaugeViewTests;
-			sourceTree = "<group>";
-		};
-		BEE44442189846A9002B489A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				BEE44443189846A9002B489A /* WMGaugeViewTests-Info.plist */,
-				BEE44444189846A9002B489A /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -201,37 +152,14 @@
 			productReference = BEE44419189846A9002B489A /* WMGaugeView.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BEE44439189846A9002B489A /* WMGaugeViewTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BEE4444E189846A9002B489A /* Build configuration list for PBXNativeTarget "WMGaugeViewTests" */;
-			buildPhases = (
-				BEE44436189846A9002B489A /* Sources */,
-				BEE44437189846A9002B489A /* Frameworks */,
-				BEE44438189846A9002B489A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BEE44440189846A9002B489A /* PBXTargetDependency */,
-			);
-			name = WMGaugeViewTests;
-			productName = WMGaugeViewTests;
-			productReference = BEE4443A189846A9002B489A /* WMGaugeViewTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		BEE44411189846A9002B489A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Will™";
-				TargetAttributes = {
-					BEE44439189846A9002B489A = {
-						TestTargetID = BEE44418189846A9002B489A;
-					};
-				};
 			};
 			buildConfigurationList = BEE44414189846A9002B489A /* Build configuration list for PBXProject "WMGaugeView" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -247,7 +175,6 @@
 			projectRoot = "";
 			targets = (
 				BEE44418189846A9002B489A /* WMGaugeView */,
-				BEE44439189846A9002B489A /* WMGaugeViewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -261,14 +188,6 @@
 				3E788DE21BDCFE7F00F78D6A /* LaunchScreen.storyboard in Resources */,
 				BEE44427189846A9002B489A /* InfoPlist.strings in Resources */,
 				BEE44430189846A9002B489A /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BEE44438189846A9002B489A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BEE44446189846A9002B489A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,23 +207,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BEE44436189846A9002B489A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BEE44448189846A9002B489A /* WMGaugeViewTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BEE44440189846A9002B489A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BEE44418189846A9002B489A /* WMGaugeView */;
-			targetProxy = BEE4443F189846A9002B489A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3E788DE01BDCFE7F00F78D6A /* LaunchScreen.storyboard */ = {
@@ -331,14 +234,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		BEE44444189846A9002B489A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BEE44445189846A9002B489A /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -355,14 +250,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -394,13 +294,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -439,48 +344,6 @@
 			};
 			name = Release;
 		};
-		BEE4444F189846A9002B489A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WMGaugeView.app/WMGaugeView";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WMGaugeView/WMGaugeView-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "WMGaugeViewTests/WMGaugeViewTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.will-tm.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		BEE44450189846A9002B489A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WMGaugeView.app/WMGaugeView";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WMGaugeView/WMGaugeView-Prefix.pch";
-				INFOPLIST_FILE = "WMGaugeViewTests/WMGaugeViewTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.will-tm.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -498,15 +361,6 @@
 			buildConfigurations = (
 				BEE4444C189846A9002B489A /* Debug */,
 				BEE4444D189846A9002B489A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BEE4444E189846A9002B489A /* Build configuration list for PBXNativeTarget "WMGaugeViewTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BEE4444F189846A9002B489A /* Debug */,
-				BEE44450189846A9002B489A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

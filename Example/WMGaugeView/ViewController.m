@@ -24,39 +24,76 @@
 {
     [super viewDidLoad];
     
-    _gaugeView.style = [WMGaugeViewStyle3D new];
-    _gaugeView.maxValue = 240.0;
-    _gaugeView.showRangeLabels = YES;
-    _gaugeView.rangeValues = @[ @50,                  @90,                @130,               @240.0              ];
-    _gaugeView.rangeColors = @[ RGB(232, 111, 33),    RGB(232, 231, 33),  RGB(27, 202, 33),   RGB(231, 32, 43)    ];
-    _gaugeView.rangeLabels = @[ @"VERY LOW",          @"LOW",             @"OK",              @"OVER FILL"        ];
-    _gaugeView.unitOfMeasurement = @"psi";
-    _gaugeView.showUnitOfMeasurement = YES;
-    _gaugeView.scaleDivisionsWidth = 0.008;
-    _gaugeView.scaleSubdivisionsWidth = 0.006;
-    _gaugeView.rangeLabelsFontColor = [UIColor blackColor];
-    _gaugeView.rangeLabelsWidth = 0.04;
-    _gaugeView.rangeLabelsFont = [UIFont fontWithName:@"Helvetica" size:0.04];
-    
-    _gaugeView2.style = [WMGaugeViewStyleFlatThin new];
-    _gaugeView2.maxValue = 100.0;
-    _gaugeView2.scaleDivisions = 10;
-    _gaugeView2.scaleSubdivisions = 5;
-    _gaugeView2.scaleStartAngle = 30;
-    _gaugeView2.scaleEndAngle = 280;
-    _gaugeView2.showScaleShadow = NO;
-    _gaugeView2.scaleFont = [UIFont fontWithName:@"AvenirNext-UltraLight" size:0.065];
-    _gaugeView2.scalesubdivisionsAligment = WMGaugeViewSubdivisionsAlignmentCenter;
-    _gaugeView2.scaleSubdivisionsWidth = 0.002;
-    _gaugeView2.scaleSubdivisionsLength = 0.04;
-    _gaugeView2.scaleDivisionsWidth = 0.007;
-    _gaugeView2.scaleDivisionsLength = 0.07;
+    [self prepareFirstGaugeView:_gaugeView];
+    [self prepareSecondGaugeView:_gaugeView2];
     
     [NSTimer scheduledTimerWithTimeInterval:2.0
                                      target:self
                                    selector:@selector(gaugeUpdateTimer:)
                                    userInfo:nil
                                     repeats:YES];
+}
+
+- (void)prepareFirstGaugeView:(WMGaugeView *)gaugeView {
+    gaugeView.style = [WMGaugeViewStyle3D new];
+    gaugeView.maxValue = 240.0;
+    gaugeView.showRangeLabels = YES;
+    gaugeView.rangeValues = @[ @50,                  @90,                @130,               @240.0              ];
+    gaugeView.rangeColors = @[ RGB(232, 111, 33),    RGB(232, 231, 33),  RGB(27, 202, 33),   RGB(231, 32, 43)    ];
+    gaugeView.rangeLabels = @[ @"VERY LOW",          @"LOW",             @"OK",              @"OVER FILL"        ];
+    gaugeView.unitOfMeasurement = @"psi";
+    gaugeView.showUnitOfMeasurement = YES;
+    gaugeView.scaleDivisionsWidth = 0.008;
+    gaugeView.scaleSubdivisionsWidth = 0.006;
+    gaugeView.rangeLabelsFontColor = [UIColor blackColor];
+    gaugeView.rangeLabelsWidth = 0.04;
+    gaugeView.rangeLabelsFont = [UIFont fontWithName:@"Helvetica" size:0.04];
+}
+
+- (void)prepareSecondGaugeView:(WMGaugeView *)gaugeView {
+    
+    gaugeView.style = [WMGaugeViewStyleFlatThin new];
+    
+    gaugeView.minValue = 0;
+    gaugeView.maxValue = 10;
+    
+    gaugeView.rangeValues = @[
+                               @(3),
+                               @(7),
+                               @(10),
+                               ];
+    
+    gaugeView.rangeColors = @[
+                               RGB(232, 231, 33),
+                               RGB(27, 202, 33),
+                               RGB(231, 32, 43)
+                               ];
+    
+    gaugeView.showRangeLabels = YES;
+    gaugeView.rangeLabels = @[ @"", @"", @"", ];
+    
+    gaugeView.showScale = NO;
+    gaugeView.scaleDivisions = 1;
+    gaugeView.scaleSubdivisions = 1;
+    gaugeView.scaleStartAngle = 90;
+    gaugeView.scaleEndAngle = 270;
+    gaugeView.showScaleShadow = NO;
+    gaugeView.showInnerBackground = NO;
+    gaugeView.scaleFont = [UIFont systemFontOfSize:0.06 weight:UIFontWeightUltraLight];
+    gaugeView.scalesubdivisionsAligment = WMGaugeViewSubdivisionsAlignmentCenter;
+    gaugeView.backgroundColor = UIColor.whiteColor;
+    gaugeView.showRangeDivisions = YES;
+    gaugeView.scaleDivisionColor = UIColor.lightGrayColor;
+    gaugeView.scaleDivisionsWidth = 0.003;
+    gaugeView.scaleDivisionsLength = 0.04;
+    gaugeView.scaleSubdivisionsWidth = 0.004;
+    gaugeView.scaleSubdivisionsLength = 0.0;
+    gaugeView.unitOfMeasurementColor = UIColor.darkGrayColor;
+    
+    gaugeView.unitOfMeasurement = @"psi";
+    gaugeView.showUnitOfMeasurement = YES;
+    
+    gaugeView.value = 6;
 }
 
 -(void)gaugeUpdateTimer:(NSTimer *)timer
