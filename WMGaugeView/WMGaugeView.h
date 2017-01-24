@@ -58,6 +58,7 @@ WMGaugeViewSubdivisionsAlignment;
 @property (nonatomic, readwrite, assign) CGFloat rangeLabelsFontKerning;
 @property (nonatomic, readwrite, strong) NSArray *rangeValues;
 @property (nonatomic, readwrite, strong) NSArray *rangeColors;
+@property (nonatomic, readwrite, strong) NSString *valueFormat;
 @property (nonatomic, readwrite, strong) NSArray *rangeLabels;
 @property (nonatomic, readwrite, assign) bool showRangeDivisions;
 @property (nonatomic, readwrite, strong) UIColor *unitOfMeasurementColor;

@@ -71,6 +71,7 @@
     
     gaugeView.showRangeLabels = YES;
     gaugeView.rangeLabels = @[ @"", @"", @"", ];
+    gaugeView.valueFormat = @"%0.0f%%";
     
     gaugeView.showScale = NO;
     gaugeView.scaleDivisions = 1;
