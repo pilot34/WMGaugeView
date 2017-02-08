@@ -15,8 +15,8 @@
 #define kCenterX            0.5
 #define kCenterY            0.5
 
-#define kNeedleColor        CGRGB(255, 104, 97)
-#define kNeedleScrewColor   CGRGB(68, 84, 105)
+#define kNeedleColor        WMCGRGB(255, 104, 97)
+#define kNeedleScrewColor   WMCGRGB(68, 84, 105)
 
 @interface WMGaugeViewStyleFlatThin ()
 
@@ -30,9 +30,9 @@
 {
     _needleLayer = [CAShapeLayer layer];
     UIBezierPath *needlePath = [UIBezierPath bezierPath];
-    [needlePath moveToPoint:CGPointMake(FULLSCALE(kCenterX - kNeedleWidth, kCenterY))];
-    [needlePath addLineToPoint:CGPointMake(FULLSCALE(kCenterX + kNeedleWidth, kCenterY))];
-    [needlePath addLineToPoint:CGPointMake(FULLSCALE(kCenterX, kCenterY - kNeedleHeight))];
+    [needlePath moveToPoint:CGPointMake(WMFULLSCALE(kCenterX - kNeedleWidth, kCenterY))];
+    [needlePath addLineToPoint:CGPointMake(WMFULLSCALE(kCenterX + kNeedleWidth, kCenterY))];
+    [needlePath addLineToPoint:CGPointMake(WMFULLSCALE(kCenterX, kCenterY - kNeedleHeight))];
     [needlePath closePath];
     
     _needleLayer.path = needlePath.CGPath;
@@ -51,8 +51,8 @@
     
     // Screw drawing
     CAShapeLayer *screwLayer = [CAShapeLayer layer];
-    screwLayer.bounds = CGRectMake(FULLSCALE(kCenterX - kNeedleScrewRadius, kCenterY - kNeedleScrewRadius), FULLSCALE(kNeedleScrewRadius * 2.0, kNeedleScrewRadius * 2.0));
-    screwLayer.position = CGPointMake(FULLSCALE(kCenterX, kCenterY));
+    screwLayer.bounds = CGRectMake(WMFULLSCALE(kCenterX - kNeedleScrewRadius, kCenterY - kNeedleScrewRadius), WMFULLSCALE(kNeedleScrewRadius * 2.0, kNeedleScrewRadius * 2.0));
+    screwLayer.position = CGPointMake(WMFULLSCALE(kCenterX, kCenterY));
     screwLayer.path = [UIBezierPath bezierPathWithOvalInRect:screwLayer.bounds].CGPath;
     screwLayer.fillColor = kNeedleScrewColor;
     
@@ -72,12 +72,12 @@
     
     // External circle
     CGContextAddEllipseInRect(context, CGRectMake(kCenterX - EXTERNAL_RING_RADIUS, kCenterY - EXTERNAL_RING_RADIUS, EXTERNAL_RING_RADIUS * 2.0, EXTERNAL_RING_RADIUS * 2.0));
-    CGContextSetFillColorWithColor(context, CGRGB(255, 104, 97));
+    CGContextSetFillColorWithColor(context, WMCGRGB(255, 104, 97));
     CGContextFillPath(context);
     
     // Inner circle
     CGContextAddEllipseInRect(context, CGRectMake(kCenterX - INTERNAL_RING_RADIUS, kCenterY - INTERNAL_RING_RADIUS, INTERNAL_RING_RADIUS * 2.0, INTERNAL_RING_RADIUS * 2.0));
-    CGContextSetFillColorWithColor(context, CGRGB(242, 99, 92));
+    CGContextSetFillColorWithColor(context, WMCGRGB(242, 99, 92));
     CGContextFillPath(context);
 }
 

@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "WMGaugeView.h"
 
-#define RGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+#define WMRGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
 
 @interface ViewController ()
 
@@ -39,7 +39,7 @@
     gaugeView.maxValue = 240.0;
     gaugeView.showRangeLabels = YES;
     gaugeView.rangeValues = @[ @50,                  @90,                @130,               @240.0              ];
-    gaugeView.rangeColors = @[ RGB(232, 111, 33),    RGB(232, 231, 33),  RGB(27, 202, 33),   RGB(231, 32, 43)    ];
+    gaugeView.rangeColors = @[ WMRGB(232, 111, 33),    WMRGB(232, 231, 33),  WMRGB(27, 202, 33),   WMRGB(231, 32, 43)    ];
     gaugeView.rangeLabels = @[ @"VERY LOW",          @"LOW",             @"OK",              @"OVER FILL"        ];
     gaugeView.unitOfMeasurement = @"psi";
     gaugeView.showUnitOfMeasurement = YES;
@@ -64,9 +64,9 @@
                                ];
     
     gaugeView.rangeColors = @[
-                               RGB(232, 231, 33),
-                               RGB(27, 202, 33),
-                               RGB(231, 32, 43)
+                               WMRGB(232, 231, 33),
+                               WMRGB(27, 202, 33),
+                               WMRGB(231, 32, 43)
                                ];
     
     gaugeView.showRangeLabels = YES;

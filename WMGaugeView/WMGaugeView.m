@@ -116,7 +116,7 @@
     _showRangeDivisions = NO;
     
     _scaleDivisionColor = nil;
-    _scaleSubDivisionColor = RGB(217, 217, 217);
+    _scaleSubDivisionColor = WMRGB(217, 217, 217);
     
     _scaleFont = nil;
     
@@ -300,7 +300,7 @@
             if (!color && _rangeValues && _rangeColors) {
                 color = [self rangeColorForValue:value];
             } else if (!color) {
-                color = RGB(68, 84, 105);
+                color = WMRGB(68, 84, 105);
             }
             CGContextSetStrokeColorWithColor(context, color.CGColor);
             CGContextSetLineWidth(context, _scaleDivisionsWidth);
@@ -380,7 +380,7 @@
         if (!color && _rangeValues && _rangeColors) {
             color = [self rangeColorForValue:num.doubleValue];
         } else if (!color) {
-            color = RGB(68, 84, 105);
+            color = WMRGB(68, 84, 105);
         }
         
         CGContextSetStrokeColorWithColor(context, color.CGColor);

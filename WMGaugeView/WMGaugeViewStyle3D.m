@@ -19,28 +19,28 @@
     // Left Needle
     CAShapeLayer *leftNeedleLayer = [CAShapeLayer layer];
     UIBezierPath *leftNeedlePath = [UIBezierPath bezierPath];
-    [leftNeedlePath moveToPoint:CGPointMake(FULLSCALE(kCenterX, kCenterY))];
-    [leftNeedlePath addLineToPoint:CGPointMake(FULLSCALE(kCenterX - kNeedleWidth, kCenterY))];
-    [leftNeedlePath addLineToPoint:CGPointMake(FULLSCALE(kCenterX, kCenterY - kNeedleHeight))];
+    [leftNeedlePath moveToPoint:CGPointMake(WMFULLSCALE(kCenterX, kCenterY))];
+    [leftNeedlePath addLineToPoint:CGPointMake(WMFULLSCALE(kCenterX - kNeedleWidth, kCenterY))];
+    [leftNeedlePath addLineToPoint:CGPointMake(WMFULLSCALE(kCenterX, kCenterY - kNeedleHeight))];
     [leftNeedlePath closePath];
     
     leftNeedleLayer.path = leftNeedlePath.CGPath;
     leftNeedleLayer.backgroundColor = [[UIColor clearColor] CGColor];
-    leftNeedleLayer.fillColor = CGRGB(176, 10, 19);
+    leftNeedleLayer.fillColor = WMCGRGB(176, 10, 19);
     
     [layer addSublayer:leftNeedleLayer];
     
     // Right Needle
     CAShapeLayer *rightNeedleLayer = [CAShapeLayer layer];
     UIBezierPath *rightNeedlePath = [UIBezierPath bezierPath];
-    [rightNeedlePath moveToPoint:CGPointMake(FULLSCALE(kCenterX, kCenterY))];
-    [rightNeedlePath addLineToPoint:CGPointMake(FULLSCALE(kCenterX + kNeedleWidth, kCenterY))];
-    [rightNeedlePath addLineToPoint:CGPointMake(FULLSCALE(kCenterX, kCenterY - kNeedleHeight))];
+    [rightNeedlePath moveToPoint:CGPointMake(WMFULLSCALE(kCenterX, kCenterY))];
+    [rightNeedlePath addLineToPoint:CGPointMake(WMFULLSCALE(kCenterX + kNeedleWidth, kCenterY))];
+    [rightNeedlePath addLineToPoint:CGPointMake(WMFULLSCALE(kCenterX, kCenterY - kNeedleHeight))];
     [rightNeedlePath closePath];
     
     rightNeedleLayer.path = rightNeedlePath.CGPath;
     rightNeedleLayer.backgroundColor = [[UIColor clearColor] CGColor];
-    rightNeedleLayer.fillColor = CGRGB(252, 18, 30);
+    rightNeedleLayer.fillColor = WMCGRGB(252, 18, 30);
     
     [layer addSublayer:rightNeedleLayer];
     
@@ -52,11 +52,11 @@
     
     // Screw drawing
     CAShapeLayer *screwLayer = [CAShapeLayer layer];
-    screwLayer.bounds = CGRectMake(FULLSCALE(kCenterX - kNeedleScrewRadius, kCenterY - kNeedleScrewRadius), FULLSCALE(kNeedleScrewRadius * 2.0, kNeedleScrewRadius * 2.0));
-    screwLayer.position = CGPointMake(FULLSCALE(kCenterX, kCenterY));
+    screwLayer.bounds = CGRectMake(WMFULLSCALE(kCenterX - kNeedleScrewRadius, kCenterY - kNeedleScrewRadius), WMFULLSCALE(kNeedleScrewRadius * 2.0, kNeedleScrewRadius * 2.0));
+    screwLayer.position = CGPointMake(WMFULLSCALE(kCenterX, kCenterY));
     screwLayer.path = [UIBezierPath bezierPathWithOvalInRect:screwLayer.bounds].CGPath;
-    screwLayer.fillColor = CGRGB(171, 171, 171);
-    screwLayer.strokeColor = CGRGBA(81, 84, 89, 100);
+    screwLayer.fillColor = WMCGRGB(171, 171, 171);
+    screwLayer.strokeColor = WMCGRGBA(81, 84, 89, 100);
     screwLayer.lineWidth = 1.5;
     
     // Screw shadow
@@ -72,7 +72,7 @@
 {
     // Default Face
     CGColorSpaceRef baseSpace = CGColorSpaceCreateDeviceRGB();
-    CGGradientRef gradient = CGGradientCreateWithColors(baseSpace, (CFArrayRef)@[iCGRGB(96, 96, 96), iCGRGB(68, 68, 68), iCGRGB(32, 32, 32)], (const CGFloat[]){0.35, 0.96, 0.99});
+    CGGradientRef gradient = CGGradientCreateWithColors(baseSpace, (CFArrayRef)@[WMiCGRGB(96, 96, 96), WMiCGRGB(68, 68, 68), WMiCGRGB(32, 32, 32)], (const CGFloat[]){0.35, 0.96, 0.99});
     CGColorSpaceRelease(baseSpace), baseSpace = NULL;
     CGContextAddEllipseInRect(context, rect);
     CGContextClip(context);
@@ -81,7 +81,7 @@
     
     // Shadow
     baseSpace = CGColorSpaceCreateDeviceRGB();
-    gradient = CGGradientCreateWithColors(baseSpace, (CFArrayRef)@[iCGRGBA(40, 96, 170, 60), iCGRGBA(15, 34, 98, 80), iCGRGBA(0, 0, 0, 120), iCGRGBA(0, 0, 0, 140)], (const CGFloat[]){0.60, 0.85, 0.96, 0.99});
+    gradient = CGGradientCreateWithColors(baseSpace, (CFArrayRef)@[WMiCGRGBA(40, 96, 170, 60), WMiCGRGBA(15, 34, 98, 80), WMiCGRGBA(0, 0, 0, 120), WMiCGRGBA(0, 0, 0, 140)], (const CGFloat[]){0.60, 0.85, 0.96, 0.99});
     CGColorSpaceRelease(baseSpace), baseSpace = NULL;
     CGContextAddEllipseInRect(context, rect);
     CGContextClip(context);
@@ -90,7 +90,7 @@
     
     // Border
     CGContextSetLineWidth(context, 0.005);
-    CGContextSetStrokeColorWithColor(context, CGRGBA(81, 84, 89, 160));
+    CGContextSetStrokeColorWithColor(context, WMCGRGBA(81, 84, 89, 160));
     CGContextAddEllipseInRect(context, rect);
     CGContextStrokePath(context);
 }
